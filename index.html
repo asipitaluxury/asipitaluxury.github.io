@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asipita Luxury</title>
+    <!-- Tailwind CSS from CDN -->
+     <link rel="icon" href="logo.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .header-bg {
+            background-color: rgba(0, 0, 0, 0.8); /* bg-black with opacity */
+            backdrop-filter: blur(8px);
+        }
+        .cart-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: none; /* Initially hidden */
+            justify-content: center;
+            align-items: center;
+            z-index: 150;
+        }
+        .cart-modal {
+            background-color: #000000; /* bg-black */
+            color: #ffffff;
+        }
+        /* Custom animation for hero section elements */
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in-up {
+            animation: fade-in-up 0.8s ease-out forwards;
+        }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-400 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body class="bg-black text-white">
+
+    <!-- Header -->
+    <header class="header-bg shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <img src="logo.jpg" class="h-12 w-12 md:w-16 md:h-16" alt="">
+                <a href="#" class="text-3xl font-extrabold text-amber-400">
+                    Asipita Luxury
+                </a>
+                <p class="hidden md:block text-sm text-gray-300">CONNECT your mind, body & soul with vibrant style!</p>
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="#collections" class="text-gray-300 hover:text-amber-400 transition-colors">Collections</a>
+                <a href="#contact" class="text-gray-300 hover:text-amber-400 transition-colors">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-[80vh] flex items-center justify-center px-4 md:px-0 bg-cover bg-center"
+        style="background-image: url('https://placehold.co/1920x1080/a18b48/000000?text=Asipita+Luxury');">
+        <div class="absolute inset-0 bg-black opacity-60"></div>
+        <div class="relative z-10 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-wide animate-fade-in-up">
+                CONNECT your mind, body & soul with vibrant style!
+            </h1>
+            <p class="mt-4 md:mt-6 text-lg md:text-xl text-gray-200 animate-fade-in-up delay-200">
+                Feel the perfect fusion of tradition and modern trends in every piece.
+            </p>
+            <a href="#collections" class="mt-8 md:mt-10 inline-flex items-center justify-center space-x-2
+                bg-amber-400 hover:bg-amber-500 text-black font-semibold py-3 px-8 rounded-full
+                shadow-lg transition-all transform hover:scale-105 animate-fade-in-up delay-400">
+                <span>Shop Now, Slay Always</span>
+                <!-- Lucide-react ArrowRightCircle icon as inline SVG for HTML compatibility -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="m16 12-4-4m4 4-4 4m4-4H8" />
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Collections Section -->
+    <section id="collections" class="py-16 md:py-24 container mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12">Our Collections</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+            <!-- Collection Cards will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <!-- Floating Shopping Cart Button -->
+    <button id="cart-button" class="fixed bottom-8 right-8 bg-amber-400 hover:bg-amber-500 text-black p-4 rounded-full
+        shadow-lg transition-transform duration-300 transform hover:scale-110 active:scale-95 z-[100]">
+        <!-- Lucide-react ShoppingCart icon as inline SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1" />
+            <circle cx="20" cy="21" r="1" />
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+        </svg>
+        <span id="cart-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none
+            text-white bg-red-600 rounded-full transform translate-x-1/2 -translate-y-1/2">
+            0
+        </span>
+    </button>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="cart-modal-overlay">
+        <div class="cart-modal p-6 md:p-8 rounded-xl shadow-2xl w-full max-w-lg relative">
+            <button id="close-cart-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                <!-- Lucide-react X icon as inline SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
+                </svg>
+            </button>
+            <h2 class="text-3xl font-bold mb-6 text-center text-amber-400">Your Cart</h2>
+            <div id="cart-items" class="max-h-80 overflow-y-auto mb-6 pr-2">
+                <!-- Cart items will be dynamically inserted here -->
+            </div>
+            <div id="cart-total" class="flex justify-between items-center px-4 py-2 text-xl font-bold rounded-lg bg-gray-900 mt-4">
+                <span>Total:</span>
+                <span id="total-price">₦0</span>
+            </div>
+            <button id="whatsapp-order-button" class="w-full bg-amber-400 hover:bg-amber-500 text-black font-semibold py-3 px-6 rounded-full
+                transition-colors flex items-center justify-center space-x-2 transform active:scale-95 mt-4">
+                <span class="text-base md:text-lg">Place Order via WhatsApp</span>
+                <!-- Lucide-react ChevronsRight icon as inline SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 18 6-6-6-6" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-black py-8 text-center">
+        <p class="text-gray-400">Nationwide delivery across Nigeria — from Kano to Abuja, your style delivered right to your doorstep!</p>
+        <div class="mt-4">
+            <a href="tel:08133646936" class="text-amber-400 font-bold hover:underline">
+                Call or WhatsApp: 08133646936
+            </a>
+        </div>
+        <div class="mt-6 text-gray-500">
+            &copy; 2024 Asipita Luxury. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DOM Elements ---
+            const collectionsGrid = document.querySelector('#collections .grid');
+            const cartButton = document.getElementById('cart-button');
+            const cartCountSpan = document.getElementById('cart-count');
+            const cartModal = document.getElementById('cart-modal');
+            const closeCartModalButton = document.getElementById('close-cart-modal');
+            const cartItemsContainer = document.getElementById('cart-items');
+            const whatsappOrderButton = document.getElementById('whatsapp-order-button');
+            const totalPriceSpan = document.getElementById('total-price');
+
+            // --- Cart State ---
+            let cart = [];
+            let allProducts = [];
+
+            // --- Function to fetch and render collections ---
+            async function fetchAndRenderCollections() {
+                try {
+                    const response = await fetch('products.json');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    allProducts = await response.json();
+                    renderCollections(allProducts);
+                } catch (error) {
+                    console.error("Could not fetch products:", error);
+                    collectionsGrid.innerHTML = `<p class="text-center text-red-500">Error loading products. Please make sure products.json is in the same folder.</p>`;
+                }
+            }
+
+            // --- Function to render collection cards ---
+            function renderCollections(products) {
+                collectionsGrid.innerHTML = products.map(product => `
+                    <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg
+                        transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-64 object-cover" />
+                        <div class="p-6">
+                            <h3 class="text-xl md:text-2xl font-bold mb-2 text-amber-400">${product.name}</h3>
+                            <p class="text-gray-300 text-sm mb-4">${product.description}</p>
+                            <p class="text-2xl font-bold text-amber-400 mt-2">₦${product.price.toLocaleString('en-NG')}</p>
+                            <button
+                                class="add-to-cart-button w-full bg-amber-400 hover:bg-amber-500 text-black font-semibold py-3 px-4 rounded-full
+                                    transition-colors transform active:scale-95 mt-4"
+                                data-name="${product.name}">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+
+                // Attach event listeners after rendering
+                document.querySelectorAll('.add-to-cart-button').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const productName = event.target.getAttribute('data-name');
+                        const product = allProducts.find(p => p.name === productName);
+                        addToCart(product);
+                    });
+                });
+            }
+
+            // --- Function to add an item to the cart ---
+            function addToCart(product) {
+                const existingItem = cart.find(item => item.name === product.name);
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push({ ...product, quantity: 1 });
+                }
+                updateCartUI();
+            }
+
+            // --- Function to remove an item from the cart ---
+            function removeFromCart(productName) {
+                const itemIndex = cart.findIndex(item => item.name === productName);
+                if (itemIndex > -1) {
+                    if (cart[itemIndex].quantity > 1) {
+                        cart[itemIndex].quantity--;
+                    } else {
+                        cart.splice(itemIndex, 1);
+                    }
+                    updateCartUI();
+                }
+            }
+
+            // --- Function to update the cart UI ---
+            function updateCartUI() {
+                const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
+                cartCountSpan.textContent = cartItemCount;
+
+                cartItemsContainer.innerHTML = '';
+                let totalCost = 0;
+
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<p class="text-gray-400 text-center py-4">Your cart is empty.</p>';
+                } else {
+                    cart.forEach(item => {
+                        totalCost += item.price * item.quantity;
+                        const itemElement = document.createElement('div');
+                        itemElement.classList.add('flex', 'justify-between', 'items-center', 'bg-gray-700', 'p-4', 'rounded-lg', 'mb-2', 'shadow-sm');
+                        itemElement.innerHTML = `
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-gray-600 rounded-md mr-4 flex-shrink-0"
+                                    style="background-image: url('${item.image}'); background-size: cover;"></div>
+                                <div>
+                                    <p class="text-lg font-semibold">${item.name}</p>
+                                    <p class="text-sm text-gray-400">Qty: ${item.quantity}</p>
+                                    <p class="text-sm font-semibold text-amber-400">₦${item.price.toLocaleString('en-NG')}</p>
+                                </div>
+                            </div>
+                            <button class="remove-from-cart-button text-gray-400 hover:text-red-500 transition-colors" data-name="${item.name}">
+                                <!-- Lucide-react Trash2 icon as inline SVG -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 6h18" />
+                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                    <line x1="10" x2="10" y1="11" y2="17" />
+                                    <line x1="14" x2="14" y1="11" y2="17" />
+                                </svg>
+                            </button>
+                        `;
+                        cartItemsContainer.appendChild(itemElement);
+                    });
+                }
+                
+                totalPriceSpan.textContent = `₦${totalCost.toLocaleString('en-NG')}`;
+
+                // Re-attach event listeners for remove buttons
+                document.querySelectorAll('.remove-from-cart-button').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const productName = event.currentTarget.getAttribute('data-name');
+                        removeFromCart(productName);
+                    });
+                });
+            }
+            
+            // --- Show/Hide Modal Functions ---
+            function showCartModal() {
+                cartModal.style.display = 'flex';
+                updateCartUI();
+            }
+
+            function hideCartModal() {
+                cartModal.style.display = 'none';
+            }
+
+            // --- WhatsApp Integration ---
+            function sendWhatsAppMessage() {
+                if (cart.length === 0) {
+                    const messageBox = document.createElement('div');
+                    messageBox.innerHTML = `
+                        <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[200]">
+                            <div class="bg-gray-800 text-white p-8 rounded-lg shadow-2xl relative w-80 text-center">
+                                <p class="text-lg font-bold">Your cart is empty.</p>
+                                <button class="mt-4 bg-amber-400 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded-full transition-colors" onclick="this.parentNode.parentNode.remove()">OK</button>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(messageBox);
+                    return;
+                }
+
+                const whatsappNumber = '2348133646936';
+                let message = "Hello Asipita Luxury, I would like to place an order for the following items:\n\n";
+                let totalCost = 0;
+
+                cart.forEach(item => {
+                    message += `- ${item.name} (Qty: ${item.quantity}) - ₦${item.price.toLocaleString('en-NG')}\n`;
+                    totalCost += item.price * item.quantity;
+                });
+
+                message += `\nTotal Cost: ₦${totalCost.toLocaleString('en-NG')}\n`;
+                message += `\nLooking forward to hearing from you!`;
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+                window.open(whatsappUrl, '_blank');
+                hideCartModal();
+            }
+
+            // --- Event Listeners ---
+            cartButton.addEventListener('click', showCartModal);
+            closeCartModalButton.addEventListener('click', hideCartModal);
+            whatsappOrderButton.addEventListener('click', sendWhatsAppMessage);
+
+            // Initial fetch and render
+            fetchAndRenderCollections();
+        });
+    </script>
+</body>
+</html>

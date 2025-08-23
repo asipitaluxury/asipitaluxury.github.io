@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Ankara Wrappers",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf41FCf_nD-5ldI6rAu5G5onh3y8mba33fvw&s?text=Ankara+Wrappers",
+        "description": "Vibrant and elegant, feel the perfect fusion of tradition.",
+        "price": 15000
+    },
+    {
+        "name": "Stylish Shadda",
+        "image": "https://files.selar.co/product-images/2022/products/Shira013/shadda-selar.co-6210aa3a14a3e.jpg?text=Stylish+Shadda",
+        "description": "Modern fabrics with a classic touch, for him & her.",
+        "price": 25000
+    },
+    {
+        "name": "Trendy Shoes",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSa4Xz2Xah6GHo3zKbGv6wvyoOhzMqDEQSdA&s?text=Trendy+Shoes",
+        "description": "Step out in style with our latest footwear collection.",
+        "price": 10000
+    },
+    {
+        "name": "Elegant Veils & Abayas",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZh3UpJqPXV2pRJmoGCMz5gMDNu6F0LprtZw&s?text=Veils+%26+Abayas",
+        "description": "Graceful and stunning designs for every occasion.",
+        "price": 30000
+    },
+    {
+        "name": "Jalabiyyas",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKK1nlOgwDY7Mke52SCwBCvabe2hB7s9Ygrg&s?text=Jalabiyyas",
+        "description": "Comfortable and chic, perfect for relaxed elegance.",
+        "price": 8000
+    },
+    {
+        "name": "Wedding Boxes & Lace",
+        "image": "https://pictures-nigeria.jijistatic.net/130215478_MzAwLTM5My0zNTEzMGVhOTMy.webp?text=Wedding+Lace",
+        "description": "Exquisite pieces to make your special day unforgettable.",
+        "price": 45000
+    }
+]
